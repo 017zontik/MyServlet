@@ -2,7 +2,7 @@
 <%@ page isELIgnored="false" %>
 <html>
 <head>
-    <title>Page title</title>
+    <title>Страница приветствия</title>
 </head>
 <body>
 <br>

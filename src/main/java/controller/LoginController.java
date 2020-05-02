@@ -43,7 +43,7 @@ public class LoginController extends HttpServlet {
         }else{
             request.setAttribute("login", request.getParameter("login"));
             request.setAttribute("password", request.getParameter("password"));
-            request.setAttribute("username",user.getUserName());
+            request.setAttribute("username",user.getUsername());
             request.setAttribute("user",user);
             getServletContext().getRequestDispatcher("/helloUser.jsp").forward(request, response);
         }

@@ -3,15 +3,15 @@ package entity;
 public class User {
     private String login;
     private String password;
-    private String userName;
+    private String username;
 
     public User() {
     }
 
-    public User(String login, String password, String userName) {
+    public User(String login, String password, String username) {
         this.login = login;
         this.password = password;
-        this.userName = userName;
+        this.username = username;
     }
 
     public String getLogin() {
@@ -22,12 +22,12 @@ public class User {
         this.login = login;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
