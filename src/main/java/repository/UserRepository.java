@@ -20,9 +20,6 @@ public class UserRepository {
         return user;
     }
 
-    public List<User> getUsers() {
-        return userList;
-    }
 
     public User getUser(String login) {
 

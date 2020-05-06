@@ -12,23 +12,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
+
 
 @WebServlet(urlPatterns = "/login")
 public class LoginController extends HttpServlet {
 
-   UserService userService = new UserService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/index.ht");
         rd.forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
-        PrintWriter writer = response.getWriter();
+
 
         String login = request.getParameter("login");
         String password = request.getParameter("password");
@@ -37,14 +35,9 @@ public class LoginController extends HttpServlet {
         if(user == null){
             getServletContext().getRequestDispatcher("/registration.jsp").forward(request, response);
 
+            }else {
 
-
-            //redirect to registration form
-        }else{
-            request.setAttribute("login", request.getParameter("login"));
-            request.setAttribute("password", request.getParameter("password"));
             request.setAttribute("username",user.getUsername());
-            request.setAttribute("user",user);
             getServletContext().getRequestDispatcher("/helloUser.jsp").forward(request, response);
         }
 

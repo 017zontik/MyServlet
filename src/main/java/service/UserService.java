@@ -7,11 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 
 public class UserService {
     private static final UserService instance = new UserService();
-    private UserRepository userRepository = new UserRepository();
+    private final UserRepository userRepository;
 
+
+    private UserService() {
+        userRepository = new UserRepository();
+    }
 
     public User login (String login, String password) {
-
 
         User user = userRepository.getUser(login);
         if(user != null && user.getPassword().equals(password)){
@@ -20,11 +23,10 @@ public class UserService {
        return null;
     }
 
-    public User addUser(HttpServletRequest request) {
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
-        String username = request.getParameter("username");
-        User user = userRepository.addUser(new User(login,password,username));
+    public User addUser(String login,String password, String username) {
+
+        User user = new User(login, password, username);
+        userRepository.addUser(user);
         return user;
     }
 

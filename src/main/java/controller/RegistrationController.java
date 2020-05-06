@@ -24,17 +24,12 @@ public class RegistrationController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
-        PrintWriter writer = response.getWriter();
-
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         String username = request.getParameter("username");
-        request.setAttribute("login", login);
-        request.setAttribute("password", password);
-        request.setAttribute("username", username);
+        UserService.getInstance().addUser(login, password, username);
 
-        User user = UserService.getInstance().addUser(request);
+
         getServletContext().getRequestDispatcher("/helloUser.jsp").forward(request, response);
 
     }
