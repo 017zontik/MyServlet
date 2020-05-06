@@ -29,7 +29,7 @@ public class RegistrationController extends HttpServlet {
         String username = request.getParameter("username");
         UserService.getInstance().addUser(login, password, username);
 
-
+        request.setAttribute("username", username);
         getServletContext().getRequestDispatcher("/helloUser.jsp").forward(request, response);
 
     }
