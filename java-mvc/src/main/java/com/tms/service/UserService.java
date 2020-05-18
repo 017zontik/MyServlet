@@ -15,19 +15,22 @@ public class UserService implements IUserService {
     private IUserDao userDao;
 
     @Override
-    public List<User> findAll(){
-    return userDao.findAll();
-}
+    public List<User> findAll() {
+        return userDao.findAll();
+    }
 
     @Override
     public void createUser(User user) {
         userDao.createUser(user);
     }
 
+
     @Override
-    public User getByUsername(String username) {
-        return userDao.getByUsername(username);
+    public User checkUser(String login, String password) {
+        User user = userDao.checkUser(login);
+        if (user != null && user.getPassword().equals(password)) {
+            return user;
+        }
+        return null;
     }
-
-
 }

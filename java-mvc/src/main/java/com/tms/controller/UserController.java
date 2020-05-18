@@ -9,8 +9,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-
 @Controller
 public class UserController {
 
@@ -19,18 +17,50 @@ public class UserController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(ModelMap model) {
-        model.addAttribute("message", "Hello there! Do you want to add new user?");
+        model.addAttribute("message", "Hello there! Do you want to do?");
         return "index";
     }
 
-    @RequestMapping(value="/all", method=RequestMethod.GET)
-    public String getUserPage(Model model) {
-        List<User> user = userService.findAll();
-        model.addAttribute("user", user);
-        return "userList";
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public ModelAndView getLogin(Model model) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("userOb", new User());
+        modelAndView.setViewName("login");
+        return modelAndView;
     }
 
-        @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ModelAndView checkUser(@ModelAttribute("userOb") User user, ModelMap model) {
+        User user1 = userService.checkUser(user.getLogin(), user.getPassword());
+
+        if (user1 == null) {
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.addObject("userOb", new User());
+            modelAndView.setViewName("incorrect");
+            return modelAndView;
+
+        } else {
+            ModelAndView modelAndView3 = new ModelAndView();
+            modelAndView3.addObject("userOb", new User());
+            model.addAttribute("login", user1.getLogin());
+            model.addAttribute("password", user1.getPassword());
+            model.addAttribute("username", user1.getUsername());
+            modelAndView3.setViewName("result");
+            return modelAndView3;
+        }
+
+
+    }
+
+
+//    @RequestMapping(value="/all", method=RequestMethod.GET)
+//    public String getUserPage(Model model) {
+//        List<User> user = userService.findAll();
+//        model.addAttribute("user", user);
+//        return "userList";
+//    }
+
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public ModelAndView user() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("userOb", new User());
@@ -38,7 +68,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String addStudent(@ModelAttribute("userOb") User user, ModelMap model) {
         model.addAttribute("login", user.getLogin());
         model.addAttribute("password", user.getPassword());

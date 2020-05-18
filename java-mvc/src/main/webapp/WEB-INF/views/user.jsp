@@ -1,12 +1,12 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <html>
 <head>
-  <title>Registratiob</title>
+  <title>Registration</title>
 </head>
 <body>
 
 <h2>Enter user information</h2>
-<form:form method="post" modelAttribute="userOb" action="/add" >
+<form:form method="post" modelAttribute="userOb" action="/registration" >
   <table>
     <tr>
       <td><form:label path="login">Login</form:label></td>

@@ -30,12 +30,11 @@ public class UserDao implements IUserDao {
         jdbcTemplate.update(sql, user.getLogin(), user.getPassword(), user.getUsername());
     }
 
+
     @Override
-    public User getByUsername(String username) {
+    public User checkUser(String login) {
+        String sql = "SELECT * FROM user WHERE login=?";
+        return jdbcTemplate.queryForObject(sql, new UserRowMapper(), login);
 
-        String sql = "SELECT * FROM user WHERE username=?";
-        return jdbcTemplate.queryForObject(sql, new UserRowMapper(), username );
     }
-
-
 }

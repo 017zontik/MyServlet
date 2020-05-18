@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface IUserDao {
     List<User> findAll();
-    void  createUser(User user);
-    User getByUsername(String username);
+
+    void createUser(User user);
+
+    User checkUser(String login);
 }
